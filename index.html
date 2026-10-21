@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ян Цзюньмэй | Личное портфолио</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.35s ease;
+        }
+
+        :root {
+            --cream: #f8f5ef;
+            --warm-dark: #4b2428;
+            --warm-grey: #7c726c;
+            --light-grey: #e9e4dd;
+            --gold: #b89b78;
+            --white: #ffffff;
+        }
+        html.dark {
+            --cream: #2c2425;
+            --warm-dark: #f0e9e3;
+            --warm-grey: #b9aca6;
+            --light-grey: #44393a;
+            --gold: #d4b894;
+        }
+
+        *::-webkit-scrollbar {
+            width: 6px;
+        }
+        *::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 10px;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--warm-dark);
+            line-height: 1.75;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Hero 首屏 + 弧形网格装饰（和原图一样） */
+        .hero {
+            width: 100%;
+            min-height: 82vh;
+            background: linear-gradient(rgba(43, 22, 26, 0.45), rgba(43, 22, 26, 0.45)), url('https://images.unsplash.com/photo-1506905925346-21bda4d32862?q=80&w=1920') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        /* 弧形网格线条 */
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 55%;
+            height: 55%;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(2.4rem,6vw,4.2rem);
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            z-index: 2;
+        }
+        .hero-sub {
+            font-size: 0.95rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.85;
+            z-index:2;
+        }
+
+        header {
+            position: sticky;
+            top:0;
+            width:100%;
+            z-index:999;
+            background: transparent;
+            padding:1.4rem 0;
+        }
+        .nav-wrap {
+            max-width: 1140px;
+            margin:0 auto;
+            padding:0 2rem;
+            display:flex;
+            justify-content: space-between;
+            align-items:center;
+        }
+        .logo {
+            font-family: Georgia, serif;
+            font-size:1.3rem;
+            letter-spacing:1px;
+            color:#fff;
+        }
+        html.dark .logo {
+            color:var(--warm-dark);
+        }
+        nav a {
+            color:rgba(255,255,255,0.82);
+            text-decoration:none;
+            margin-left:20px;
+            font-size:0.92rem;
+            letter-spacing:0.5px;
+        }
+        html.dark nav a {
+            color:var(--warm-grey);
+        }
+        nav a:hover {
+            color:var(--gold);
+        }
+        #themeBtn {
+            border:1px solid rgba(255,255,255,0.25);
+            background:transparent;
+            color:#fff;
+            padding:6px 11px;
+            border-radius:99px;
+            cursor:pointer;
+            margin-left:14px;
+        }
+        html.dark #themeBtn {
+            border:1px solid var(--warm-grey);
+            color:var(--warm-dark);
+        }
+
+        .container {
+            max-width:1140px;
+            margin:0 auto;
+            padding:0 2rem;
+        }
+        section {
+            margin:7rem 0;
+        }
+        h2 {
+            font-family: Georgia, serif;
+            font-size:1.8rem;
+            font-weight:400;
+            color:var(--warm-dark);
+            margin-bottom:2rem;
+        }
+
+        .about-card, .skill-card {
+            background: var(--white);
+            border-radius:14px;
+            padding:2.2rem;
+            border: 1px solid var(--light-grey);
+        }
+        html.dark .about-card,
+        html.dark .skill-card {
+            background: var(--light-grey);
+        }
+        .about-card p {
+            color:var(--warm-grey);
+            font-size:1.04rem;
+        }
+
+        .project-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px,1fr));
+            gap:26px;
+        }
+        .project-card {
+            background: var(--white);
+            border-radius:14px;
+            border: 1px solid var(--light-grey);
+            overflow:hidden;
+            cursor:pointer;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        html.dark .project-card {
+            background: var(--light-grey);
+        }
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--gold);
+        }
+        /* 项目预览图区域 */
+        .project-img {
+            width:100%;
+            height:180px;
+            object-fit:cover;
+            display:block;
+        }
+        .project-text {
+            padding:1.4rem;
+        }
+        .project-card h3 {
+            font-family: Georgia, serif;
+            font-size:1.35rem;
+            margin-bottom:7px;
+            color:var(--warm-dark);
+        }
+        .project-card p {
+            color:var(--warm-grey);
+            font-size:0.9rem;
+        }
+
+        ul li {
+            color:var(--warm-grey);
+            margin:10px 0;
+            list-style:none;
+            position:relative;
+            padding-left:18px;
+        }
+        ul li::before {
+            content: "—";
+            color:var(--gold);
+            position:absolute;
+            left:0;
+        }
+
+        /* Модальное окно */
+        .overlay {
+            position: fixed;
+            inset:0;
+            background: rgba(26,16,18,0.72);
+            display:none;
+            align-items:center;
+            justify-content:center;
+            z-index:1000;
+            padding:1rem;
+        }
+        .modal {
+            background: var(--cream);
+            border-radius:16px;
+            padding:2.6rem;
+            max-width:600px;
+            width:100%;
+            border:1px solid var(--light-grey);
+        }
+        .modal h3 {
+            font-family: Georgia, serif;
+            color:var(--warm-dark);
+            margin-bottom:1rem;
+            font-size:1.5rem;
+        }
+        .modal p {
+            color:var(--warm-grey);
+        }
+        .close-modal {
+            margin-top:1.6rem;
+            padding:9px 22px;
+            border:none;
+            background:var(--gold);
+            color:#fff;
+            border-radius:99px;
+            cursor:pointer;
+        }
+        .back-top {
+            position:fixed;
+            bottom:32px;
+            right:32px;
+            width:46px;
+            height:46px;
+            border-radius:50%;
+            border:none;
+            background:var(--gold);
+            color:#fff;
+            font-size:18px;
+            cursor:pointer;
+            display:none;
+        }
+
+        @media (max-width:640px) {
+            .nav-wrap {
+                flex-wrap:wrap;
+                gap:12px;
+            }
+            nav a {
+                margin-left:7px;
+                font-size:0.84rem;
+            }
+            .hero h1 {
+                font-size:2rem;
+            }
+            section {
+                margin:4.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <header>
+            <div class="nav-wrap">
+                <div class="logo">YJM Portfolio</div>
+                <nav>
+                    <a href=" ">Обо мне</a >
+                    <a href="#study">Обучение</a >
+                    <a href="#can">Навыки</a >
+                    <a href="#projects">Проекты</a >
+                    <button id="themeBtn">🌓</button>
+                </nav>
+            </div>
+        </header>
+        <h1>Портфолио Ян Цзюньмэй</h1>
+        <div class="hero-sub">ДИЗАЙН · ВИЗУАЛ · ВЕБ-РАЗРАБОТКА</div>
+    </section>
+
+    <div class="container">
+        <section id="about">
+            <h2>Обо мне</h2>
+            <div class="about-card">
+                <p>Привет! Меня зовут Ян Цзюньмэй, я молодой дизайнер из Китая. Я увлекаюсь визуальным искусством, цифровым творчеством и веб-разработкой.</p>
+                <br>
+                <p>Я активно изучаю русский язык, видеомонтаж и 3D-моделирование. У меня есть опыт создания цифровых иллюстраций и трехмерных моделей. В данном портфолио я представляю свои основные творческие работы, особенно проекты по видеомонтажу.</p>
+            </div>
+        </section>
+
+        <section id="study">
+            <h2>Что я изучаю</h2>
+            <div class="skill-card">
+                <ul>
+                    <li>Русский язык (улучшение разговорной и письменной речи)</li>
+                    <li>Профессиональный видеомонтаж и цветокоррекция</li>
+                    <li>3D-моделирование и визуализация</li>
+                    <li>Адаптивная верстка HTML/CSS</li>
+                    <li>Программирование на JavaScript</li>
+                    <li>Работа с Git и публикация проектов</li>
+                    <li>UI/UX дизайн в Figma</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="can">
+            <h2>Мои навыки</h2>
+            <div class="skill-card">
+                <ul>
+                    <li>Создавать авторские цифровые иллюстрации</li>
+                    <li>Разрабатывать качественные 3D-модели</li>
+                    <li>Профессионально монтировать и обрабатывать видео</li>
+                    <li>Верстать современные адаптивные сайты</li>
+                    <li>Реализовывать интерактивный функционал на JavaScript</li>
+                    <li>Разрабатывать дизайнерские прототипы интерфейсов</li>
+                </ul>
+            </div>
+        </section>
+<section id="projects">
+    <h2>Мои проекты</h2>
+    <div class="project-list">
+        <div class="project-card" data-name="Видеомонтаж" data-desc="Мои авторские короткометражные работы: профессиональный монтаж, плавные переходы, цветокоррекция, работа со звуком и атмосферой видео.">
+            <img class="project-img" src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600" alt="Видеомонтаж">
+            <div class="project-text">
+                <h3>Видеомонтаж</h3>
+                <p>Творческие видеоработы</p>
+            </div>
+        </div>
+        <div class="project-card" data-name="3D-моделирование" data-desc="Трехмерное моделирование объектов и сцен, визуализация, работа с формами, текстурами и композицией.">
+            <img class="project-img" src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600" alt="3D">
+            <div class="project-text">
+                <h3>3D Модели</h3>
+                <p>Объемное моделирование</p>
+  </div>
+     </div>
+        <div class="project-card" data-name="Цифровые иллюстрации" data-desc="Авторские иллюстрации, художественная графика, работа с цветом, композицией и стилем.">
+            <img class="project-img" src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600" alt="Иллюстрации">
+            <div class="project-text">
+                <h3>Иллюстрации</h3>
+                <p>Цифровое искусство</p >
+            </div>
+        </div>
+        <div class="project-card" data-name="Личное портфолио" data-desc="Адаптивный современный сайт-портфолио с интерактивными элементами и адаптацией под мобильные устройства.">
+            <img class="project-img" src="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=600" alt="Веб">
+            <div class="project-text">
+                <h3>Веб-портфолио</h3>
+                <p>Web-разработка + дизайн</p>
+            </div>
+        </div>
+    </div>
+</section>
+           </div>
+
+    <div class="overlay" id="overlay">
+        <div class="modal">
+            <h3 id="modalTitle"></h3>
+            <pid="modalText"></p>
+            <button class="close-modal">Закрыть</button>
+        </div>
+    </div>
+
+    <button class="back-top" id="backTop">↑</button>
+
+    <script>
+        const themeBtn = document.getElementById('themeBtn');
+        themeBtn.onclick = () =>{
+            document.documentElement.classList.toggle('dark');
+        }
+
+        const overlay = document.getElementById('overlay');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalText = document.getElementById('modalText');
+        const closeBtn = document.querySelector('.close-modal');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                modalTitle.textContent = card.dataset.name;
+                modalText.textContent = card.dataset.desc;
+                overlay.style.display = 'flex';
+            })
+        })
+        closeBtn.onclick = () => overlay.style.display = 'none';
+        overlay.onclick = (e) => {
+            if(e.target === overlay) overlay.style.display = 'none';
+        }
+
+        const backTopBtn = document.getElementById('backTop');
+        window.addEventListener('scroll', () => {
+            backTopBtn.style.display = window.scrollY > 350 ? 'block' : 'none';
+        })
+        backTopBtn.onclick = () => {
+            window.scrollTo({top:0, behavior:'smooth'});
+        }
+    </script>
+</body>
+</html>
